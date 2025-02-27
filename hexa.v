@@ -137,6 +137,7 @@ pub fn neighbors_hexa_y_by_x(x int, y int, max_x int, max_y int) [][]int{
 	}
 	return avec_x
 }
+
 // directionelle x
 pub fn neighbor_hexa_x(x int, y int, max_x int, max_y int,  dir Direction_x) [][]int{
 	mut neighbor := [][]int{}
@@ -206,7 +207,7 @@ pub fn neighbor_hexa_y_by_x(x int, y int, max_x int, max_y int,  dir Direction_y
 }
 
 // Raycasting
-pub fn ray_cast_hexa_x(x int, y int, dir Direction_x, world_map [][][]int, max_view int) (int, int, int){
+pub fn ray_cast_hexa_x(x int, y int, dir Direction_x, world_map [][][]int, max_view int, min int) (int, int, int){
 	// x, y is the point from where the ray is emit
 	mut pos_x	:= y
 	mut pos_y	:= x
@@ -241,16 +242,76 @@ pub fn ray_cast_hexa_x(x int, y int, dir Direction_x, world_map [][][]int, max_v
 	return pos_x, pos_y, dist
 }
 
-pub fn ray_cast_hexa_y_by_x(x int, y int, dir Direction_y, world_map [][][]int, max_view int) (int, int, int){
-	new_y, new_x, dist := ray_cast_hexa_x(y, x, dir_y_to_x(dir), world_map, max_view)
+pub fn ray_cast_hexa_y_by_x(x int, y int, dir Direction_y, world_map [][][]int, max_view int, min int) (int, int, int){
+	new_y, new_x, dist := ray_cast_hexa_x(y, x, dir_y_to_x(dir), world_map, max_view, min)
 	return new_x, new_y, dist
 }
 
 // Drawings
+// Solos
 pub fn draw_hexagon(x f32, y f32, size f32, rota f32, color gg.Color, ctx gg.Context){
 	ctx.draw_polygon_filled(x, y, size, 6, rota, color)
 }
 
 pub fn draw_hexagon_x(x f32, y f32, size f32, color gg.Color, ctx gg.Context){
 	draw_hexagon(x, y, size, 30, color, ctx)
+}
+
+pub fn draw_hexagon_y(x f32, y f32, size f32, color gg.Color, ctx gg.Context){
+	draw_hexagon(x, y, size, 60, color, ctx)
+}
+
+// Whole map
+pub fn draw_map_x(dec_x int, dex_y int, r f32, world_map [][][]int, color gg.Color, ctx gg.Context){
+	for x in dec_x..world_map.len{
+		for y in dec_y..world_map[x].len{
+			pos_x, pos_y := hexa.coo_hexa_x_to_ortho(x, y)
+			
+			mut c := gg.Color{125, 125, 125, 255}
+			if x%2 == 0 && y%2 == 0{
+				c = gg.Color{0, 0, 255, 255}
+			}
+			else if x%2 == 0 {
+				c = gg.Color{255, 0, 122, 255}
+			}
+			else if y%2 == 0{
+				c = gg.Color{255, 122, 0, 255}
+			}
+			else{
+				c = gg.Color{0, 255, 0, 255}
+			}
+
+			// if coo_x == x && coo_y == y{
+			// 	c = gg.Color{255, 255, 255, 255}
+			// }
+			hexa.draw_hexagon_x(f32(pos_x*r), f32(pos_y*r), f32(r), c, ctx)
+		}
+	}
+}
+
+pub fn draw_map_y(dec_x int, dex_y int,r f32, world_map [][][]int, color gg.Color, ctx gg.Context){
+	for x in dec_x..world_map.len{
+		for y in dec_y..world_map[x].len{
+			pos_x, pos_y := hexa.coo_hexa_x_to_ortho(x, y)
+			
+			mut c := gg.Color{125, 125, 125, 255}
+			if x%2 == 0 && y%2 == 0{
+				c = gg.Color{0, 0, 255, 255}
+			}
+			else if x%2 == 0 {
+				c = gg.Color{255, 0, 122, 255}
+			}
+			else if y%2 == 0{
+				c = gg.Color{255, 122, 0, 255}
+			}
+			else{
+				c = gg.Color{0, 255, 0, 255}
+			}
+
+			// if coo_x == x && coo_y == y{
+			// 	c = gg.Color{255, 255, 255, 255}
+			// }
+			hexa.draw_hexagon_y(f32(pos_x*r), f32(pos_y*r), f32(r), c, ctx)
+		}
+	}
 }

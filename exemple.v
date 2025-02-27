@@ -74,7 +74,7 @@ fn main() {
 	// 		println("Difs: ${xb-xr}, ${yb-yr}")
 	// 	}
 	// }
-	// app.ctx.run()
+	app.ctx.run()
 }
 
 fn on_init(mut app App){}

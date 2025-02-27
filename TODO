@@ -1,0 +1,9 @@
+idée :Voir pour utiliser les fonctions hexa_x(x, y){} puisse servir a faire des fonctions 
+hexa_y(x, y){
+    tempo := hexa_x(y, x)
+    mut avec_x := [][]int{}
+	for t in tempo_x{
+		avec_x << [t[1], t[0]]
+	}
+	return avec_x
+}

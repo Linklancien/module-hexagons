@@ -1,4 +1,5 @@
 module hexa
+import gg
 
 pub enum Direction_x{
 	up_left
@@ -35,55 +36,30 @@ pub fn dir_y_to_x (dir_y Direction_y) Direction_x{
 // tranfo de coo hexagonal en une position orthogonale
 // lignes orizontales
 pub fn coo_hexa_x_to_ortho(x int, y int) (f32, f32){
-	mut new_x := f32(2*x)
-	new_y := f32(2*y)
+	mut new_x := f32(x)*1.73
+	mut new_y := f32(int(y/2))*3
 
-	if y%2 == 0 {
-		new_x += 0.5
+	if y%2 == 1 {
+		new_x -= 0.866 // sqrt(3)/2
+		new_y += 1.5
 	}
-	else{
-		new_x -= 0.5
-	}
+
 	return new_x, new_y
 }
 
 pub fn coo_ortho_to_hexa_x(x f32, y f32) (int, int){
-	mut new_x := x
-	new_y := int(y/2 + 0.5)
-	if new_y%2 == 0 {
-		new_x -= 0.5
-	}
-	else{
-		new_x += 0.5
-	}
-	return int(new_x/2 +0.5), new_y
+	return int(x/1.73 + 0.6), int(2*y/3)
 }
 
 // lignes verticales
 pub fn coo_hexa_y_to_ortho(x int, y int) (f32, f32){
-	new_x := f32(2*x)
-	mut new_y := f32(2*y)
-
-	if x%2 == 0 {
-		new_y += 0.5
-	}
-	else{
-		new_y -= 0.5
-	}
+	new_y, new_x := coo_hexa_x_to_ortho(y, x)
 	return new_x, new_y
 }
 
 pub fn coo_ortho_to_hexa_y(x f32, y f32) (int, int){
-	new_x := int(x/2 + 0.5)
-	mut new_y := y
-
-	if new_x%2 == 0 {
-		new_y -= 0.5
-	}
-	else{
-		new_y += 0.5
-	}
-	return new_x, int(new_y/2 +0.5)
+	new_y, new_x := coo_ortho_to_hexa_x(y, x)
+	return new_x, new_y
 }
 
 
@@ -266,6 +242,15 @@ pub fn ray_cast_hexa_x(x int, y int, dir Direction_x, world_map [][][]int, max_v
 }
 
 pub fn ray_cast_hexa_y_by_x(x int, y int, dir Direction_y, world_map [][][]int, max_view int) (int, int, int){
-	y, x, dist := ray_cast_hexa_x(y, x, dir_y_to_x(dir), world_map, max_view)
-	return x, y, dist
+	new_y, new_x, dist := ray_cast_hexa_x(y, x, dir_y_to_x(dir), world_map, max_view)
+	return new_x, new_y, dist
+}
+
+// Drawings
+pub fn draw_hexagon(x f32, y f32, size f32, rota f32, color gg.Color, ctx gg.Context){
+	ctx.draw_polygon_filled(x, y, size, 6, rota, color)
+}
+
+pub fn draw_hexagon_x(x f32, y f32, size f32, color gg.Color, ctx gg.Context){
+	draw_hexagon(x, y, size, 30, color, ctx)
 }

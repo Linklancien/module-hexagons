@@ -27,40 +27,41 @@ fn main() {
 		event_fn: on_event
 		sample_count: 4
 	)
-	// map_test := [][][]int{len: 10, init: 
-	// 	[][]int{len: 10, init:
-	// 			if index == 0 || index == 9{[1]}else{[]}
-	// 		}
-	// }
-	// println(hexa.ray_cast_hexa_x(5, 5, hexa.Direction_x.up_right, map_test, 10))
-	// max := 10
-	// mut errors	:= [0, 0, 0]
-	// for x in 0..max+1{
-	// 	for y in 0..max+1{
-	// 		print("$x, $y : ")
-	// 		avec_y := hexa.neighbors_hexa_y(x, y, max, max) // True one
-	// 		avec_x := hexa.neighbors_hexa_y_by_x(x, y, max, max)
-			
-	// 		if avec_x.len != avec_y.len{
-	// 			// print("Not as many")
-	// 			errors[0] += 1
-	// 		}
-	// 		else{
-	// 			for i in 0..avec_x.len{
-	// 				if avec_x[i] == avec_y[i]{
-	// 					// print("GOOD ")
-	// 					errors[1] += 1
-	// 				}
-	// 				else{
-	// 					print("[${avec_x[i][0] - avec_y[i][0]}, ${avec_x[i][1] - avec_y[i][1]}] ")
-	// 					errors[2] += 1
-	// 				}
-	// 			}
-	// 		}
-	// 		println("")
-	// 	}
-	// }
-	// print("Not ${errors[0]}, GOOD ${errors[1]}, Difs ${errors[2]}")
+	map_test := [][][]int{len: 10, init: 
+		[][]int{len: 10, init:
+				if index == 0 || index == 9{[1]}else{[]}
+			}
+	}
+	println(hexa.ray_cast_hexa_x(5, 5, hexa.Direction_x.up_right, map_test, 10, 1))
+	max := 10
+	mut errors	:= [0, 0, 0]
+	for x in 0..max+1{
+		for y in 0..max+1{
+			print("$x, $y : ")
+			avec_y := hexa.neighbors_hexa_y(x, y, max, max) // True one
+			avec_x := hexa.neighbors_hexa_y_by_x(x, y, max, max)
+			print("$avec_y |")
+			print("$avec_x ")
+			if avec_x.len != avec_y.len{
+				// print("Not as many")
+				errors[0] += 1
+			}
+			else{
+				for i in 0..avec_x.len{
+					if avec_x[i] == avec_y[i]{
+						// print("GOOD ")
+						errors[1] += 1
+					}
+					else{
+						print("[${avec_x[i][0] - avec_y[i][0]}, ${avec_x[i][1] - avec_y[i][1]}] ")
+						errors[2] += 1
+					}
+				}
+			}
+			println("")
+		}
+	}
+	print("Not ${errors[0]}, GOOD ${errors[1]}, Difs ${errors[2]}")
 	// Not 32, GOOD 134, Difs 260	x et y a leurs places dans _x
 	// Not 0, GOOD 18, Difs 504		x et y inversé dans _x
 	// max := 10
@@ -74,7 +75,7 @@ fn main() {
 	// 		println("Difs: ${xb-xr}, ${yb-yr}")
 	// 	}
 	// }
-	app.ctx.run()
+	// app.ctx.run()
 }
 
 fn on_init(mut app App){}

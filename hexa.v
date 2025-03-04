@@ -75,7 +75,7 @@ pub fn neighbors_hexa_x(x int, y int, max_x int, max_y int) [][]int{
 	// both [[x-1, y]] [[x+1, y]] [[x, y-1]] [[x, y+1]]
 	if x > 0{
 		neighbor << [[x-1, y]]
-		if y%2 == 1{
+		if y%2 == 0{
 			if y > 0{
 				neighbor << [[x-1, y-1]]
 			}
@@ -86,7 +86,7 @@ pub fn neighbors_hexa_x(x int, y int, max_x int, max_y int) [][]int{
 	}
 	if x < max_x{
 		neighbor << [[x+1, y]]
-		if y%2 == 0{
+		if y%2 == 1{
 			if y > 0{
 				neighbor << [[x+1, y-1]]
 			}
@@ -94,6 +94,12 @@ pub fn neighbors_hexa_x(x int, y int, max_x int, max_y int) [][]int{
 				neighbor << [[x+1, y+1]]
 			}
 		}
+	}
+	if y > 0{
+		neighbor << [[x, y-1]]
+	}
+	if y < max_y{
+		neighbor << [[x, y+1]]
 	}
 	
 	if neighbor.len == 0{neighbor = [][]int{len: 1, init: []int{}}}
@@ -105,7 +111,7 @@ pub fn neighbors_hexa_y(x int, y int, max_x int, max_y int) [][]int{
 	
 	if y > 0{
 		neighbor << [[x, y-1]]
-		if x%2 == 1{
+		if x%2 == 0{
 			if x > 0{
 				neighbor << [[x-1, y-1]]
 			}
@@ -116,7 +122,7 @@ pub fn neighbors_hexa_y(x int, y int, max_x int, max_y int) [][]int{
 	}
 	if y < max_y{
 		neighbor << [[x, y+1]]
-		if x%2 == 0{
+		if x%2 == 1{
 			if x > 0{
 				neighbor << [[x-1, y+1]]
 			}
@@ -125,6 +131,13 @@ pub fn neighbors_hexa_y(x int, y int, max_x int, max_y int) [][]int{
 			}
 		}
 	}
+	if x > 0{
+		neighbor << [[x-1, y]]
+	}
+	if x < max_x{
+		neighbor << [[x+1, y]]
+	}
+
 	if neighbor.len == 0{neighbor = [][]int{len: 1, init: []int{}}}
 	return neighbor
 }
@@ -262,7 +275,7 @@ pub fn draw_hexagon_y(x f32, y f32, size f32, color gg.Color, ctx gg.Context){
 }
 
 // Whole map
-pub fn draw_map_x(dec_x int, dex_y int, r f32, world_map [][][]int, color gg.Color, ctx gg.Context){
+pub fn draw_map_x(dec_x int, dec_y int, r f32, world_map [][][]int, color gg.Color, ctx gg.Context){
 	for x in dec_x..world_map.len{
 		for y in dec_y..world_map[x].len{
 			pos_x, pos_y := hexa.coo_hexa_x_to_ortho(x, y)
@@ -289,7 +302,7 @@ pub fn draw_map_x(dec_x int, dex_y int, r f32, world_map [][][]int, color gg.Col
 	}
 }
 
-pub fn draw_map_y(dec_x int, dex_y int,r f32, world_map [][][]int, color gg.Color, ctx gg.Context){
+pub fn draw_map_y(dec_x int, dec_y int,r f32, world_map [][][]int, color gg.Color, ctx gg.Context){
 	for x in dec_x..world_map.len{
 		for y in dec_y..world_map[x].len{
 			pos_x, pos_y := hexa.coo_hexa_x_to_ortho(x, y)

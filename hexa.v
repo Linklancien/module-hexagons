@@ -36,13 +36,8 @@ pub fn dir_y_to_x(dir_y Direction_y) Direction_x {
 // tranfo de coo hexagonal en une position orthogonale
 // lignes orizontales
 pub fn coo_hexa_x_to_ortho(x int, y int) (f32, f32) {
-	mut new_x := f32(x) * 1.73
-	mut new_y := f32(int(y / 2)) * 3
-
-	if y % 2 == 1 {
-		new_x -= 0.866 // sqrt(3)/2
-		new_y += 1.5
-	}
+	mut new_x := (2*f32(x) + y%2)* 0.87
+	mut new_y := f32(y) * 1.5
 
 	return new_x, new_y
 }

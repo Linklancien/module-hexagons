@@ -1,4 +1,4 @@
-module hexa
+module hexagons
 
 import gg
 

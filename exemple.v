@@ -1,5 +1,5 @@
 import gg
-import hexa
+import hexagons
 
 const bg_color = gg.Color{0, 0, 0, 255}
 
@@ -28,20 +28,20 @@ fn main() {
 		sample_count:  4
 	)
 
-	// println("${hexa.line_hexa_x(0, 0, 10, 10, hexa.Direction_x.up_right, 10)}")
+	// println("${hexagons.line_hexa_x(0, 0, 10, 10, hexagons.Direction_x.up_right, 10)}")
 	// map_test := [][][]int{len: 10, init:
 	// 	[][]int{len: 10, init:
 	// 			if index == 0 || index == 9{[1]}else{[]}
 	// 		}
 	// }
-	// println(hexa.ray_cast_hexa_x(5, 5, hexa.Direction_x.up_right, map_test, 10, 1))
+	// println(hexagons.ray_cast_hexa_x(5, 5, hexagons.Direction_x.up_right, map_test, 10, 1))
 	// max := 10
 	// mut errors	:= [0, 0, 0]
 	// for x in 0..max+1{
 	// 	for y in 0..max+1{
 	// 		print("$x, $y : ")
-	// 		avec_y := hexa.neighbors_hexa_y(x, y, max, max) // True one
-	// 		avec_x := hexa.neighbors_hexa_y_by_x(x, y, max, max)
+	// 		avec_y := hexagons.neighbors_hexa_y(x, y, max, max) // True one
+	// 		avec_x := hexagons.neighbors_hexa_y_by_x(x, y, max, max)
 	// 		print("$avec_y |")
 	// 		print("$avec_x ")
 	// 		if avec_x.len != avec_y.len{
@@ -70,9 +70,9 @@ fn main() {
 	// for xb in 0..max{
 	// 	for yb in 0..max{
 
-	// 		x, y := hexa.coo_hexa_x_to_ortho(xb, yb)
+	// 		x, y := hexagons.coo_hexa_x_to_ortho(xb, yb)
 
-	// 		xr, yr := hexa.coo_ortho_to_hexa_x(x, y)
+	// 		xr, yr := hexagons.coo_ortho_to_hexa_x(x, y)
 
 	// 		println("Difs: ${xb-xr}, ${yb-yr}")
 	// 	}
@@ -87,9 +87,9 @@ fn on_frame(mut app App) {
 	r := f32(30.0)
 	world_map := [][][]int{len: 10, init: [][]int{len: 10, init: []int{len: 10, init: 10}}}
 
-	// hexa.draw_colored_map_x(0, 0, r, world_map, gg.Color{100, 125, 0, 255}, app.ctx)
-	x, y := hexa.coo_ortho_to_hexa_x(app.mouse_x / r, app.mouse_y / r)
-	hexa.draw_debug_map_x(0, 0, r, world_map, app.ctx, x, y)
+	// hexagons.draw_colored_map_x(0, 0, r, world_map, gg.Color{100, 125, 0, 255}, app.ctx)
+	x, y := hexagons.coo_ortho_to_hexa_x(app.mouse_x / r, app.mouse_y / r)
+	hexagons.draw_debug_map_x(0, 0, r, world_map, app.ctx, x, y)
 	app.ctx.end()
 }
 

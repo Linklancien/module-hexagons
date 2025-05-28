@@ -36,33 +36,23 @@ pub fn dir_y_to_x(dir_y Direction_y) Direction_x {
 // tranfo de coo hexagonal en une position orthogonale
 // lignes orizontales
 pub fn coo_hexa_x_to_ortho(coo_x int, coo_y int) (f32, f32) {
-	return (2*f32(coo_x) + coo_y%2)* 0.87, f32(coo_y) * 1.5
+	return (2 * f32(coo_x) + coo_y % 2) * 0.87, f32(coo_y) * 1.5
 }
 
-pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32) (int, int) {
-	mut coo_x := int(pos_x/0.87)/2
-	println('This: ${pos_x/0.87} ${int(pos_x/0.87)}')
-	mut coo_y := int(pos_y/1.5)
-	if coo_y%2 == 1 {
-		coo_x -= 1
-	}
-	return coo_x, coo_y
-}
-
-pub fn test_coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int) {
+pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int) {
 	mut not_sure := true
 
+	// Search coo_x:
 	mut coo_x := -1
-	for x_test in 0..max_x{
-		if pos_x < 0.87*2*x_test{
-			if 0.87*(2*x_test - 1) < pos_x{
+	for x_test in 0 .. max_x {
+		if pos_x < 0.87 * 2 * x_test {
+			if 0.87 * (2 * x_test - 1) < pos_x {
 				coo_x = x_test
 				break
 			}
-		}
-		else{
+		} else {
 			// pos_x > 0.87*2*x_test
-			if pos_x < 0.87*(2*x_test + 1){
+			if pos_x < 0.87 * (2 * x_test + 1) {
 				coo_x = x_test
 				not_sure = false
 				break
@@ -70,35 +60,40 @@ pub fn test_coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int
 		}
 	}
 
+	// Search coo_y:
 	mut coo_y := -1
-	mut up_first := -1
-	if not_sure{
-		up_first = 1
+	mut up_first := 1
+	if not_sure {
+		up_first = -1
 	}
-	if !(pos_y > up_first*(pos_x/(0.87*2)+ coo_x) - 1){
-		println('Passed')
-		for test_coo_y in 0..max_y{
-			if test_coo_y%2 == 0{
-				if pos_y < up_first*(pos_x/(0.87*2)+ coo_x) - 1{
-					coo_y = test_coo_y - 1
-					println('BOT')
-					break
-				}
-				else if pos_y < -up_first*(pos_x/(0.87*2)+ coo_x) + 1{
-					coo_y = test_coo_y
-					println('TOP')
-					break
-				}
+	ofset_pos_x := (pos_x / (0.87 * 2) - coo_x)
+
+	for test_coo_y in 0 .. max_y {
+		if test_coo_y % 2 == 0 {
+			if pos_y - 1.5 * test_coo_y < up_first * ofset_pos_x - 1 {
+				coo_y = test_coo_y - 1
+				break
+			} else if pos_y - 1.5 * test_coo_y < -up_first * ofset_pos_x + 1 {
+				coo_y = test_coo_y
+				break
 			}
 		}
-		
 	}
 
 	// final adjusments
-	if coo_y%2 == 1 && not_sure{
+	if coo_y % 2 == 1 && not_sure {
 		coo_x -= 1
 	}
 
+	return coo_x, coo_y
+}
+
+pub fn test_coo_ortho_to_hexa_x(pos_x f32, pos_y f32) (int, int) {
+	mut coo_x := int(pos_x / 0.87) / 2
+	mut coo_y := int(pos_y / 1.5)
+	if coo_y % 2 == 1 {
+		coo_x -= 1
+	}
 	return coo_x, coo_y
 }
 
@@ -108,8 +103,8 @@ pub fn coo_hexa_y_to_ortho(x int, y int) (f32, f32) {
 	return new_x, new_y
 }
 
-pub fn coo_ortho_to_hexa_y(x f32, y f32) (int, int) {
-	new_y, new_x := coo_ortho_to_hexa_x(y, x)
+pub fn coo_ortho_to_hexa_y(x f32, y f32, max_x int, max_y int) (int, int) {
+	new_y, new_x := coo_ortho_to_hexa_x(y, x, max_y, max_x)
 	return new_x, new_y
 }
 
@@ -419,7 +414,7 @@ pub fn draw_debug_map_x(dec_x int, dec_y int, r f32, world_map [][][]int, ctx gg
 			if coo_x == x && coo_y == y {
 				c = gg.Color{255, 255, 255, 255}
 			}
-			draw_hexagon_x(f32((pos_x) * r), f32((pos_y) * r), f32(r), c, ctx)
+			draw_hexagon_x(f32(pos_x * r), f32(pos_y * r), f32(r), c, ctx)
 		}
 	}
 }
@@ -445,7 +440,7 @@ pub fn draw_debug_map_y(dec_x int, dec_y int, r f32, world_map [][][]int, ctx gg
 			if coo_x == x && coo_y == y {
 				c = gg.Color{255, 255, 255, 255}
 			}
-			draw_hexagon_y(f32((pos_x) * r), f32((pos_y) * r), f32(r), c, ctx)
+			draw_hexagon_y(f32(pos_x * r), f32(pos_y * r), f32(r), c, ctx)
 		}
 	}
 }
@@ -455,8 +450,7 @@ pub fn draw_colored_map_x(dec_x int, dec_y int, r f32, world_map [][][]int, colo
 		for y in 0 .. world_map[x].len {
 			pos_x, pos_y := coo_hexa_y_to_ortho(x, y)
 
-			draw_hexagon_y(f32((pos_x) * r), f32((pos_y) * r), f32(r - 3), color,
-				ctx)
+			draw_hexagon_y(f32(pos_x * r), f32(pos_y * r), f32(r - 3), color, ctx)
 		}
 	}
 }

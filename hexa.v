@@ -344,7 +344,7 @@ pub fn line_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x, n int) [
 }
 
 // Raycasting
-pub fn ray_cast_hexa_x(x int, y int, dir Direction_x, world_map [][][]Tile, max_view int, min int) (int, int, int) {
+pub fn ray_cast_hexa_x(x int, y int, dir Direction_x, world_map [][][]Hexa_tile, max_view int, min int) (int, int, int) {
 	// x, y is the point from where the ray is emit
 	mut pos_x := y
 	mut pos_y := x
@@ -377,7 +377,7 @@ pub fn ray_cast_hexa_x(x int, y int, dir Direction_x, world_map [][][]Tile, max_
 	return pos_x, pos_y, dist
 }
 
-pub fn ray_cast_hexa_y_by_x(x int, y int, dir Direction_y, world_map [][][]Tile, max_view int, min int) (int, int, int) {
+pub fn ray_cast_hexa_y_by_x(x int, y int, dir Direction_y, world_map [][][]Hexa_tile, max_view int, min int) (int, int, int) {
 	new_y, new_x, dist := ray_cast_hexa_x(y, x, dir_y_to_x(dir), world_map, max_view,
 		min)
 	return new_x, new_y, dist
@@ -399,7 +399,7 @@ pub fn draw_hexagon_y(x f32, y f32, size f32, color gg.Color, ctx gg.Context) {
 
 // Whole map
 // debug:
-pub fn draw_debug_map_x(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [][][]Tile, coo_x int, coo_y int) {
+pub fn draw_debug_map_x(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [][][]Hexa_tile, coo_x int, coo_y int) {
 	for x in 0 .. world_map.len {
 		for y in 0 .. world_map[x].len {
 			pos_x, pos_y := coo_hexa_x_to_ortho(x, y)
@@ -425,7 +425,7 @@ pub fn draw_debug_map_x(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [
 	}
 }
 
-pub fn draw_debug_map_y(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [][][]Tile, coo_x int, coo_y int) {
+pub fn draw_debug_map_y(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [][][]Hexa_tile, coo_x int, coo_y int) {
 	for x in 0 .. world_map.len {
 		for y in 0 .. world_map[x].len {
 			pos_x, pos_y := coo_hexa_y_to_ortho(x, y)
@@ -451,7 +451,7 @@ pub fn draw_debug_map_y(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [
 	}
 }
 
-pub fn draw_colored_map_x(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [][][]Tile, transparency u8) {
+pub fn draw_colored_map_x(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [][][]Hexa_tile, transparency u8) {
 	for x in 0 .. world_map.len {
 		for y in 0 .. world_map[x].len {
 			pos_x, pos_y := coo_hexa_y_to_ortho(x, y)

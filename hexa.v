@@ -34,7 +34,7 @@ pub fn dir_y_to_x(dir_y Direction_y) Direction_x {
 	return dir_x
 }
 
-pub interface Tile {
+pub interface Hexa_tile {
 mut:
 	color gx.Color
 }

@@ -1,6 +1,6 @@
 import gg
 import gx
-import hexagons {Tile}
+import hexagons { Tile }
 
 const bg_color = gg.Color{0, 0, 0, 255}
 
@@ -91,11 +91,10 @@ fn on_init(mut app App) {}
 fn on_frame(mut app App) {
 	app.ctx.begin()
 	r := f32(30.0)
-	world_map := [][][]Tile{len: 30, init: [][]Tile{len: 30, init: []Tile{}}}
-
+	mut world_map := [][][]Tile{len: 30, init: [][]Tile{len: 30, init: []Tile{len: 1, init: Tile(Temp{})}}}
 	// hexagons.draw_colored_map_x(0, 0, r, world_map, gg.Color{100, 125, 0, 255}, app.ctx)
 	x, y := hexagons.coo_ortho_to_hexa_x(app.mouse_x / r, app.mouse_y / r, 30, 30)
-	hexagons.draw_debug_map_x(0, 0, r, world_map, app.ctx, x, y)
+	hexagons.draw_debug_map_x(app.ctx, 0, 0, r, world_map, x, y)
 	app.ctx.end()
 }
 

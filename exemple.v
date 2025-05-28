@@ -1,5 +1,6 @@
 import gg
-import hexagons
+import gx
+import hexagons {Tile}
 
 const bg_color = gg.Color{0, 0, 0, 255}
 
@@ -10,6 +11,11 @@ mut:
 	// mouse
 	mouse_x f32
 	mouse_y f32
+}
+
+struct Temp {
+mut:
+	color gx.Color = gx.Color{0, 255, 0, 255}
 }
 
 fn main() {
@@ -85,7 +91,7 @@ fn on_init(mut app App) {}
 fn on_frame(mut app App) {
 	app.ctx.begin()
 	r := f32(30.0)
-	world_map := [][][]int{len: 30, init: [][]int{len: 30, init: []int{len: 10, init: 10}}}
+	world_map := [][][]Tile{len: 30, init: [][]Tile{len: 30, init: []Tile{}}}
 
 	// hexagons.draw_colored_map_x(0, 0, r, world_map, gg.Color{100, 125, 0, 255}, app.ctx)
 	x, y := hexagons.coo_ortho_to_hexa_x(app.mouse_x / r, app.mouse_y / r, 30, 30)

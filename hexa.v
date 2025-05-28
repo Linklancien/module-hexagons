@@ -52,7 +52,7 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32) (int, int) {
 pub fn test_coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int) {
 	mut not_sure := true
 
-	mut coo_x := 0
+	mut coo_x := -1
 	for x_test in 0..max_x{
 		if pos_x < 0.87*2*x_test{
 			if 0.87*(2*x_test - 1) < pos_x{
@@ -71,20 +71,22 @@ pub fn test_coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int
 	}
 
 	mut coo_y := -1
-	if !(pos_y < pos_x/0.87*(0.5) - 1){
-		mut up_first := 1
-		if not_sure{
-			up_first = -1
-		}
-
+	mut up_first := -1
+	if not_sure{
+		up_first = 1
+	}
+	if !(pos_y > up_first*(pos_x/(0.87*2)+ coo_x) - 1){
+		println('Passed')
 		for test_coo_y in 0..max_y{
 			if test_coo_y%2 == 0{
-				if pos_y < up_first*(pos_x/0.87*(0.5)+ coo_x) - 1{
+				if pos_y < up_first*(pos_x/(0.87*2)+ coo_x) - 1{
 					coo_y = test_coo_y - 1
+					println('BOT')
 					break
 				}
-				else if pos_y < -up_first*(pos_x/0.87*(0.5)+ coo_x) + 1{
+				else if pos_y < -up_first*(pos_x/(0.87*2)+ coo_x) + 1{
 					coo_y = test_coo_y
+					println('TOP')
 					break
 				}
 			}

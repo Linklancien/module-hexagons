@@ -50,8 +50,9 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32) (int, int) {
 }
 
 pub fn test_coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int) {
+	mut not_sure := true
+
 	mut coo_x := 0
-	mut prefactor := 1
 	for x_test in 0..max_x{
 		if pos_x < 0.87*2*x_test{
 			if 0.87*(2*x_test - 1) < pos_x{
@@ -63,29 +64,40 @@ pub fn test_coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int
 			// pos_x > 0.87*2*x_test
 			if pos_x < 0.87*(2*x_test + 1){
 				coo_x = x_test
-				prefactor *= -1
+				not_sure = false
 				break
 			}
 		}
 	}
-	mut coo_y := 0
-	for test_coo_y in 0..max_y{
-		if below_pente_cote(test_coo_y - test_coo_y%2, coo_x, pos_x, pos_y, prefactor){
-			coo_y = test_coo_y
-			break
+
+	mut coo_y := -1
+	if !(pos_y < pos_x/0.87*(0.5) - 1){
+		mut up_first := 1
+		if not_sure{
+			up_first = -1
 		}
-		prefactor *= -1
+
+		for test_coo_y in 0..max_y{
+			if test_coo_y%2 == 0{
+				if pos_y < up_first*(pos_x/0.87*(0.5)+ coo_x) - 1{
+					coo_y = test_coo_y - 1
+					break
+				}
+				else if pos_y < -up_first*(pos_x/0.87*(0.5)+ coo_x) + 1{
+					coo_y = test_coo_y
+					break
+				}
+			}
+		}
+		
 	}
 
-	if coo_y%2 == 1{
+	// final adjusments
+	if coo_y%2 == 1 && not_sure{
 		coo_x -= 1
 	}
 
 	return coo_x, coo_y
-}
-
-fn below_pente_cote(test_coo_y int, coo_x int, pos_x f32, pos_y f32, prefactor int, ) bool{
-	return pos_y < test_coo_y + prefactor*(pos_x/0.87 - coo_x)*(0.5)
 }
 
 // lignes verticales

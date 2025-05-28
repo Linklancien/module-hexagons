@@ -89,6 +89,7 @@ fn on_frame(mut app App) {
 
 	// hexagons.draw_colored_map_x(0, 0, r, world_map, gg.Color{100, 125, 0, 255}, app.ctx)
 	x, y := hexagons.test_coo_ortho_to_hexa_x(app.mouse_x / r, app.mouse_y / r, 10, 10)
+	println('This: x: $x y: $y')
 	hexagons.draw_debug_map_x(0, 0, r, world_map, app.ctx, x, y)
 	app.ctx.end()
 }

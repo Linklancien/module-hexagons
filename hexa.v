@@ -456,8 +456,10 @@ pub fn draw_colored_map_x(ctx gg.Context, dec_x int, dec_y int, r f32, world_map
 		for y in 0 .. world_map[x].len {
 			pos_x, pos_y := coo_hexa_y_to_ortho(x, y)
 
+			ctx.begin()
 			draw_hexagon_y(f32(pos_x * r), f32(pos_y * r), f32(r - 3), attenuation(world_map[x][y][0].color,
 				transparency), ctx)
+			ctx.end(how:.passthru)
 		}
 	}
 }

@@ -402,7 +402,7 @@ pub fn draw_hexagon_y(x f32, y f32, size f32, color gg.Color, ctx gg.Context) {
 pub fn draw_debug_map_x(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [][][]Hexa_tile, coo_x int, coo_y int) {
 	for x in 0 .. world_map.len {
 		for y in 0 .. world_map[x].len {
-			pos_x, pos_y := coo_hexa_x_to_ortho(x + dex_x, y + dec_y)
+			pos_x, pos_y := coo_hexa_x_to_ortho(x + dec_x, y + dec_y)
 
 			mut c := gg.Color{125, 125, 125, 255}
 			if x == 0 && y == 0 {
@@ -428,7 +428,7 @@ pub fn draw_debug_map_x(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [
 pub fn draw_debug_map_y(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [][][]Hexa_tile, coo_x int, coo_y int) {
 	for x in 0 .. world_map.len {
 		for y in 0 .. world_map[x].len {
-			pos_x, pos_y := coo_hexa_y_to_ortho(x + dex_x, y + dec_y)
+			pos_x, pos_y := coo_hexa_y_to_ortho(x + dec_x, y + dec_y)
 
 			mut c := gg.Color{125, 125, 125, 255}
 			if x == 0 && y == 0 {
@@ -454,7 +454,7 @@ pub fn draw_debug_map_y(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [
 pub fn draw_colored_map_x(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [][][]Hexa_tile, transparency u8) {
 	for x in 0 .. world_map.len {
 		for y in 0 .. world_map[x].len {
-			pos_x, pos_y := coo_hexa_y_to_ortho(x + dex_x, y + dec_y)
+			pos_x, pos_y := coo_hexa_y_to_ortho(x + dec_x, y + dec_y)
 
 			draw_hexagon_y(f32(pos_x * r), f32(pos_y * r), f32(r - 3), attenuation(world_map[x][y][0].color,
 				transparency), ctx)

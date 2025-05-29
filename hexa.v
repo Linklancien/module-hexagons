@@ -454,7 +454,7 @@ pub fn draw_debug_map_y(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [
 pub fn draw_colored_map_x(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [][][]Hexa_tile, transparency u8) {
 	for x in 0 .. world_map.len {
 		for y in 0 .. world_map[x].len {
-			pos_x, pos_y := coo_hexa_y_to_ortho(x + dec_x, y + dec_y)
+			pos_x, pos_y := coo_hexa_x_to_ortho(x + dec_x, y + dec_y)
 
 			draw_hexagon_y(f32(pos_x * r), f32(pos_y * r), f32(r - 3), attenuation(world_map[x][y][0].color,
 				transparency), ctx)

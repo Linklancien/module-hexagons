@@ -2,7 +2,7 @@ module hexagons
 
 import gg
 import gx
-import math {abs}
+import math { abs }
 
 pub enum Direction_x {
 	up_left
@@ -116,18 +116,19 @@ pub fn coo_ortho_to_hexa_y(x f32, y f32, max_x int, max_y int) (int, int) {
 }
 
 // dist
-pub fn distance_hexa_x(x int, y int, new_x int, new_y int) int{
+pub fn distance_hexa_x(x int, y int, new_x int, new_y int) int {
 	mut dist := abs(y - new_y)
-	if new_x > x{
+	if new_x > x && dist == 0 {
+		dist += abs(x - new_x)
+	} else if new_x > x {
 		dist += abs(x + 1 - new_x)
-	}
-	else if new_x < x - 1{
+	} else if new_x < x - 1 {
 		dist += abs(x - 1 - new_x)
 	}
 	return dist
 }
 
-pub fn distance_hexa_y(x int, y int, new_x int, new_y int) int{
+pub fn distance_hexa_y(x int, y int, new_x int, new_y int) int {
 	return distance_hexa_x(y, x, new_y, new_x)
 }
 

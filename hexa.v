@@ -119,7 +119,7 @@ pub fn coo_ortho_to_hexa_y(x f32, y f32, max_x int, max_y int) (int, int) {
 pub fn distance_hexa_x(x int, y int, new_x int, new_y int) int{
 	mut dist := abs(y - new_y)
 	if new_x > x{
-		dist += abs(x - new_x)
+		dist += abs(x - 1 - new_x)
 	}
 	else if new_x < x - 1{
 		dist += abs(x - 1 - new_x)

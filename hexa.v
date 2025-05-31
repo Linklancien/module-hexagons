@@ -132,21 +132,17 @@ pub fn distance_hexa_y(x int, y int, new_x int, new_y int) int {
 pub fn path_to_hexa_x(x int, y int, new_x int, new_y int, max_x int, max_y int) [][]int {
 	mut path := [][]int{}
 	new_pos_x, new_pos_y := coo_hexa_x_to_ortho(new_x, new_y)
-	pos_x, pos_y := coo_hexa_x_to_ortho(new_x, new_y)
+	pos_x, pos_y := coo_hexa_x_to_ortho(x, y)
 	prec := 100
 	rise := (new_pos_y - pos_y) / prec
 	run := (new_pos_x - pos_x) / prec
 	for i in 0 .. prec {
 		test_x, test_y := coo_ortho_to_hexa_x(pos_x + i * run, pos_y + i * rise, max_x,
 			max_y)
-		println([pos_x + i * run, pos_y + i * rise])
-		println([test_x, test_y])
 		if [test_x, test_y] !in path {
 			path << [[test_x, test_y]]
 		}
 	}
-	println(rise)
-	println(run)
 	return path
 }
 

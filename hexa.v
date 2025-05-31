@@ -145,6 +145,8 @@ pub fn path_to_hexa_x(x int, y int, new_x int, new_y int, max_x int, max_y int) 
 			path << [[test_x, test_y]]
 		}
 	}
+	println(rise)
+	println(run)
 	return path
 }
 

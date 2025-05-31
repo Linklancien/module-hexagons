@@ -129,7 +129,7 @@ pub fn distance_hexa_y(x int, y int, new_x int, new_y int) int {
 	return distance_hexa_x(y, x, new_y, new_x)
 }
 
-pub fn path_to_hexa_x(x int, y int, new_x int, new_y int) [][]int {
+pub fn path_to_hexa_x(x int, y int, new_x int, new_y int) [][2]int {
 	mut path := [][2]int{}
 	new_pos_x, new_pos_y := coo_hexa_x_to_ortho(new_x, new_y)
 	pos_x, pos_y := coo_hexa_x_to_ortho(new_x, new_y)

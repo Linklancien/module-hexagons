@@ -117,9 +117,7 @@ pub fn coo_ortho_to_hexa_y(x f32, y f32, max_x int, max_y int) (int, int) {
 
 // dist
 pub fn distance_hexa_x(x int, y int, new_x int, new_y int) int {
-	mut dist := sqrt((y - new_y)*(y - new_y) + (x - new_x)*(x - new_x))
-	
-	return dist
+	return int(sqrt((y - new_y) * (y - new_y) + (x - new_x) * (x - new_x)))
 }
 
 pub fn distance_hexa_y(x int, y int, new_x int, new_y int) int {

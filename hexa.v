@@ -140,6 +140,9 @@ pub fn path_to_hexa_x(x int, y int, new_x int, new_y int, max_x int, max_y int) 
 		test_x, test_y := coo_ortho_to_hexa_x(pos_x + i * run, pos_y + i * rise, max_x,
 			max_y)
 		if [test_x, test_y] !in path {
+			println(pos_x + i * run)
+			println(pos_y + i * rise)
+			println([test_x, test_y] )
 			path << [[test_x, test_y]]
 		}
 	}
@@ -395,13 +398,13 @@ pub fn ray_cast_hexa_x(x int, y int, dir Direction_x, world_map [][][]Hexa_tile,
 			if world_map[pos_x][pos_y].len > 0 {
 				condition = false
 			} else if dist >= max_view {
-				print('Out of view')
+				println('Out of view')
 				condition = false
 			}
 		} else {
 			// Used when the border is reach
 			condition = false
-			print('Breaked')
+			println('Breaked')
 			break
 		}
 	}

@@ -88,7 +88,7 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int
 	}
 
 	// final adjusments
-	if coo_y % 2 == 1 && not_sure {
+	if coo_y % 2 == 0 && not_sure {
 		coo_x += 1
 	}
 

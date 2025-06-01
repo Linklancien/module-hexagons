@@ -43,7 +43,7 @@ mut:
 // tranfo de coo hexagonal en une position orthogonale
 // lignes orizontales
 pub fn coo_hexa_x_to_ortho(coo_x int, coo_y int) (f32, f32) {
-	return (2 * f32(coo_x) - abs(coo_y) % 2) * 0.87, f32(coo_y) * 1.5
+	return (2 * f32(coo_x) + abs(coo_y) % 2) * 0.87, f32(coo_y) * 1.5
 }
 
 pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int) {
@@ -89,7 +89,7 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int
 
 	// final adjusments
 	if coo_y % 2 == 1 && not_sure {
-		coo_x += 1
+		coo_x -= 1
 	}
 
 	return coo_x, coo_y
@@ -131,12 +131,12 @@ pub fn distance_hexa_y(x int, y int, new_x int, new_y int) int {
 
 pub fn path_to_hexa_x(x int, y int, new_x int, new_y int, max_x int, max_y int) [][]int {
 	mut path := [][]int{}
-	pos_x, pos_y := coo_hexa_x_to_ortho(x, y)
 	new_pos_x, new_pos_y := coo_hexa_x_to_ortho(new_x, new_y)
+	pos_x, pos_y := coo_hexa_x_to_ortho(x, y)
 	prec := 10
 	rise := (new_pos_y - pos_y) / prec
 	run := (new_pos_x - pos_x) / prec
-	for i in 0 .. prec{
+	for i in 0 .. prec + 1 {
 		test_x, test_y := coo_ortho_to_hexa_x(pos_x + i * run, pos_y + i * rise, max_x,
 			max_y)
 		if [test_x, test_y] !in path {

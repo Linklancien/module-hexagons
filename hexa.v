@@ -69,6 +69,56 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int
 	}
 
 	// Search coo_y:
+	mut coo_y := 0
+	// mut up_first := -1
+	// if not_sure {
+	// 	up_first = 1
+	// }
+	ofset_pos_x := (pos_x / (0.87 * 2) - coo_x)
+
+	// for test_coo_y in 0 .. max_y {
+	// 	if test_coo_y % 2 == 0 {
+	// 		if pos_y - 1.5 * test_coo_y < up_first * ofset_pos_x - 1 {
+	// 			coo_y = test_coo_y - 1
+	// 			break
+	// 		} else if pos_y - 1.5 * test_coo_y < -up_first * ofset_pos_x + 1 {
+	// 			coo_y = test_coo_y
+	// 			break
+	// 		}
+	// 	}
+	// }
+
+	// final adjusments
+	// if coo_y % 2 == 1 && not_sure {
+	// 	coo_x -= 1
+	// }
+
+	return coo_x, coo_y
+}
+
+pub fn sav_coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int) {
+	mut not_sure := true
+
+	// Search coo_x:
+	mut coo_x := -1
+	for x_test in 0 .. max_x {
+		if pos_x < 0.87 * 2 * x_test {
+			if 0.87 * (2 * x_test - 1) < pos_x {
+				coo_x = x_test
+				not_sure = true
+				break
+			}
+		} else {
+			// pos_x > 0.87*2*x_test
+			if pos_x < 0.87 * (2 * x_test + 1) {
+				coo_x = x_test
+				not_sure = false
+				break
+			}
+		}
+	}
+
+	// Search coo_y:
 	mut coo_y := -1
 	mut up_first := -1
 	if not_sure {

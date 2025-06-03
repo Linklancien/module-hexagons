@@ -55,14 +55,14 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int
 		if pos_x < 0.87 * 2 * x_test {
 			if 0.87 * (2 * x_test - 1) < pos_x {
 				coo_x = x_test
-				not_sure = true
+				not_sure = false
 				break
 			}
 		} else {
 			// pos_x > 0.87*2*x_test
 			if pos_x < 0.87 * (2 * x_test + 1) {
 				coo_x = x_test
-				not_sure = false
+				not_sure = true
 				break
 			}
 		}

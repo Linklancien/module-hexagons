@@ -70,9 +70,9 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int
 
 	// Search coo_y:
 	mut coo_y := -1
-	mut up_first := 1
+	mut up_first := -1
 	if not_sure {
-		up_first = -1
+		up_first = 1
 	}
 	ofset_pos_x := (pos_x / (0.87 * 2) - coo_x)
 

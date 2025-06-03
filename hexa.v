@@ -75,7 +75,7 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int
 	// if not_sure {
 	// 	up_first = 1
 	// }
-	ofset_pos_x := (pos_x / (0.87 * 2) - coo_x)
+	// ofset_pos_x := (pos_x / (0.87 * 2) - coo_x)
 
 	// for test_coo_y in 0 .. max_y {
 	// 	if test_coo_y % 2 == 0 {

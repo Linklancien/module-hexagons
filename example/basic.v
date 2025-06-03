@@ -46,10 +46,9 @@ fn on_frame(mut app App) {
 
 	// hexagons.draw_colored_map_x(0, 0, r, world_map, gg.Color{100, 125, 0, 255}, app.ctx)
 	x, y := hexagons.coo_ortho_to_hexa_x(app.mouse_x / r, app.mouse_y / r, 30, 30)
-	of_set_x := 0
-	of_set_y := 0
-	hexagons.draw_debug_map_x(app.ctx, of_set_x, of_set_y, r, world_map, x - of_set_x,
-		y - of_set_y)
+	of_set_x := 1
+	of_set_y := 1
+	hexagons.draw_debug_map_x(app.ctx, of_set_x, of_set_y, r, world_map, x - of_set_x, y - of_set_y)
 	app.ctx.end()
 }
 

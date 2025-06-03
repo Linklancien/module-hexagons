@@ -503,7 +503,7 @@ pub fn draw_debug_map_x(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [
 				c = gg.Color{0, 255, 0, 255}
 			}
 
-			if coo_x == x && coo_y == y {
+			if coo_x == x + dec_x && coo_y == y + dec_y {
 				c = gg.Color{255, 255, 255, 255}
 			}
 			draw_hexagon_x(f32(pos_x * r), f32(pos_y * r), f32(r), c, ctx)
@@ -529,7 +529,7 @@ pub fn draw_debug_map_y(ctx gg.Context, dec_x int, dec_y int, r f32, world_map [
 				c = gg.Color{0, 255, 0, 255}
 			}
 
-			if coo_x == x && coo_y == y {
+			if coo_x == x + dec_x && coo_y == y + dec_y {
 				c = gg.Color{255, 255, 255, 255}
 			}
 			draw_hexagon_y(f32(pos_x * r), f32(pos_y * r), f32(r), c, ctx)

@@ -43,7 +43,7 @@ mut:
 // tranfo de coo hexagonal en une position orthogonale
 // lignes orizontales
 pub fn coo_hexa_x_to_ortho(coo_x int, coo_y int) (f32, f32) {
-	return (2 * f32(coo_x) + abs(coo_y) % 2) * 0.87, f32(coo_y) * 1.5
+	return (2 * f32(coo_x) + abs(coo_y - 1) % 2) * 0.87, f32(coo_y) * 1.5
 }
 
 pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int) {

@@ -47,7 +47,7 @@ pub fn coo_hexa_x_to_ortho(coo_x int, coo_y int) (f32, f32) {
 }
 
 pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int) {
-	mut not_sure := false
+	mut not_sure := true
 
 	// Search coo_x:
 	mut coo_x := -1
@@ -61,7 +61,7 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int
 			// pos_x > 0.87*2*x_test
 			if pos_x < 0.87 * (2 * x_test + 1) {
 				coo_x = x_test
-				not_sure = true
+				not_sure = false
 				break
 			}
 		}
@@ -88,7 +88,7 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int
 	}
 
 	// final adjusments
-	if coo_y % 2 == 0 && not_sure {
+	if coo_y % 2 == 1 && not_sure {
 		coo_x -= 1
 	}
 

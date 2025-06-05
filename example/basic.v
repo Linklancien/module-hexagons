@@ -41,7 +41,8 @@ fn on_frame(mut app App) {
 	mut world_map := [][][]Hexa_tile{len: 30, init: [][]Hexa_tile{len: 30, init: []Hexa_tile{len: 1, init: Hexa_tile(Temp{})}}}
 
 	// hexagons.draw_colored_map_x(0, 0, r, world_map, gg.Color{100, 125, 0, 255}, app.ctx)
-	x, y := hexagons.coo_ortho_to_hexa_x(app.ctx.mouse_pos_x / r, app.ctx.mouse_pos_y / r, 30, 30)
+	x, y := hexagons.coo_ortho_to_hexa_x(app.ctx.mouse_pos_x / r, app.ctx.mouse_pos_y / r,
+		30, 30)
 	of_set_x := 2
 	of_set_y := 2
 	hexagons.draw_debug_map_x(app.ctx, of_set_x, of_set_y, r, world_map, x - of_set_x,

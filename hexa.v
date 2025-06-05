@@ -74,10 +74,7 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int
 	// not_sure == true | not_sure == false
 
 	// Search coo_y:
-	pos_x_recentered := pos_x - 0.87 * 2.0 * f32(coo_x)
-	assert pos_x_recentered < 1
-	assert pos_x_recentered > -1
-	pos_x_cste := pos_x_recentered * 0.5 / 0.87
+	pos_x_cste := (pos_x * 0.5 / 0.87 - f32(coo_x))
 
 	mut coo_y := -1
 	if pos_y > -1 {
@@ -89,7 +86,7 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int
 						break
 					}
 				} else {
-					if pos_y < y * 1.5 + (0.5 + pos_x_cste) {
+					if pos_y < y * 1.5 + (1 + pos_x_cste) {
 						coo_y = y
 						break
 					}
@@ -103,7 +100,7 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int
 						break
 					}
 				} else {
-					if pos_y < y * 1.5 + (0.5 - pos_x_cste) {
+					if pos_y < y * 1.5 + (1 - pos_x_cste) {
 						coo_y = y
 						break
 					}

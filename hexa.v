@@ -74,7 +74,7 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int
 	// not_sure == true | not_sure == false
 
 	// Search coo_y:
-	pos_x_recentered := pos_x - 0.87 * 2 * x_test
+	pos_x_recentered := pos_x - 0.87 * 2 * coo_x
 	assert pos_x_recentered < 1
 	assert pos_x_recentered > 1
 	mut coo_y := -1

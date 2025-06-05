@@ -86,7 +86,7 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int
 						break
 					}
 				} else {
-					if pos_y < y * 1.5 + (1 + pos_x_cste) {
+					if pos_y < y * 1.5 + (0.5 - pos_x_cste) {
 						coo_y = y
 						break
 					}
@@ -100,7 +100,7 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int
 						break
 					}
 				} else {
-					if pos_y < y * 1.5 + (1 - pos_x_cste) {
+					if pos_y < y * 1.5 + (0.5 + pos_x_cste) {
 						coo_y = y
 						break
 					}

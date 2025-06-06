@@ -30,12 +30,11 @@ fn main() {
 		sample_count:  4
 	)
 
-	app.ctx.run()
+	println(hexagons.path_to_hexa_x(0, 1, 0, 2, 10, 10))
+	// app.ctx.run()
 }
 
-fn on_init(mut app App) {
-	println(hexagons.path_to_hexa_x(0, 0, 0, 1, 10, 10))
-}
+fn on_init(mut app App) {}
 
 fn on_frame(mut app App) {
 	app.ctx.begin()

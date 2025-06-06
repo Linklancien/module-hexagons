@@ -52,7 +52,7 @@ pub fn coo_ortho_to_hexa_x(pos_x f32, pos_y f32, max_x int, max_y int) (int, int
 	// Search coo_x:
 	mut coo_x := -1
 	for x_test in 0 .. max_x {
-		if pos_x <= 0.87 * 2 * x_test {
+		if pos_x < 0.87 * 2 * x_test {
 			if 0.87 * (2 * x_test - 1) <= pos_x {
 				coo_x = x_test
 				not_sure = true

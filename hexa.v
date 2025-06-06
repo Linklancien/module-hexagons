@@ -525,7 +525,7 @@ pub fn draw_colored_map_y(ctx gg.Context, dec_x int, dec_y int, r f32, world_map
 		for y in 0 .. world_map[x].len {
 			pos_x, pos_y := coo_hexa_y_to_ortho(x + dec_x, y + dec_y)
 			transpar := transparency
-			if [x, y] is in path{
+			if [x, y] in path{
 				transpar = 155
 			}
 

@@ -386,8 +386,8 @@ fn prop_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x, n int) [][]i
 					} else {
 						neighbor << [[x, y + 1]]
 					}
-					neighbor << prop_hexa_x(next_x, y - 1, max_x, max_y, Direction_x.down_left, n - 1)
-					neighbor << line_hexa_x(next_x, y - 1, max_x, max_y, Direction_x.down_right, n - 1)
+					neighbor << prop_hexa_x(next_x, y + 1, max_x, max_y, Direction_x.down_left, n - 1)
+					neighbor << line_hexa_x(next_x, y + 1, max_x, max_y, Direction_x.down_right, n - 1)
 				}
 			}
 			else {}

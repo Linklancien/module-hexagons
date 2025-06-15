@@ -311,9 +311,7 @@ pub fn neighbor_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x) [][]
 			}
 		}
 	}
-	if neighbor.len == 0 {
-		neighbor = [][]int{len: 1, init: []int{}}
-	}
+	
 	return neighbor
 }
 

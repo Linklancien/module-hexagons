@@ -391,7 +391,7 @@ fn prop_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x, n int) [][]i
 pub fn line_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x, n int) [][]int {
 	mut neighbor := [][]int{}
 	neighbor << neighbor_hexa_x(x, y, max_x, max_y, dir)
-	if n > 1 {
+	if n > 1  && neighbor.len > 0{
 		neighbor << line_hexa_x(neighbor[0][0], neighbor[0][1], max_x, max_y, dir, n - 1)
 	}
 	return neighbor

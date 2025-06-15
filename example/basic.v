@@ -30,7 +30,6 @@ fn main() {
 		sample_count:  4
 	)
 
-	println(hexagons.path_to_hexa_x(0, 0, 0, 2, 10, 10))
 	app.ctx.run()
 }
 
@@ -44,10 +43,19 @@ fn on_frame(mut app App) {
 	// hexagons.draw_colored_map_x(0, 0, r, world_map, gg.Color{100, 125, 0, 255}, app.ctx)
 	x, y := hexagons.coo_ortho_to_hexa_x(app.ctx.mouse_pos_x / r, app.ctx.mouse_pos_y / r,
 		30, 30)
-	of_set_x := 2
-	of_set_y := 2
-	hexagons.draw_debug_map_x(app.ctx, of_set_x, of_set_y, r, world_map, x - of_set_x,
-		y - of_set_y)
+	path := hexagons.neighbor_hexa_x(x, y, 30, 30, hexagons.Direction_x.down_left)
+
+	// up_left
+	// up_right
+	// left
+	// right
+	// down_left
+	// down_right
+
+
+	of_set_x := 0
+	of_set_y := 0
+	hexagons.draw_colored_map_x(app.ctx, of_set_x, of_set_y, r, world_map, path, u8(255))
 	app.ctx.end()
 }
 

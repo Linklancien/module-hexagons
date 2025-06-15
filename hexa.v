@@ -267,7 +267,7 @@ pub fn neighbors_hexa_y_by_x(x int, y int, max_x int, max_y int) [][]int {
 pub fn neighbor_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x) [][]int {
 	mut neighbor := [][]int{}
 	match dir {
-		.up_left {
+		.down_left {
 			if x > 0 && y < max_y {
 				if y % 2 == 0 {
 					neighbor << [[x, y + 1]]
@@ -276,7 +276,7 @@ pub fn neighbor_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x) [][]
 				}
 			}
 		}
-		.up_right {
+		.down_right {
 			if x < max_x && y < max_y {
 				if y % 2 == 0 {
 					neighbor << [[x + 1, y + 1]]
@@ -295,7 +295,7 @@ pub fn neighbor_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x) [][]
 				neighbor << [[x + 1, y]]
 			}
 		}
-		.down_left {
+		.up_left {
 			if x > 0 && y > 0 {
 				if y % 2 == 0 {
 					neighbor << [[x, y - 1]]
@@ -304,7 +304,7 @@ pub fn neighbor_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x) [][]
 				}
 			}
 		}
-		.down_right {
+		.up_right {
 			if x < max_x && y > 0 {
 				if y % 2 == 0 {
 					neighbor << [[x + 1, y - 1]]

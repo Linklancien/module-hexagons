@@ -44,7 +44,7 @@ fn on_frame(mut app App) {
 	x, y := hexagons.coo_ortho_to_hexa_x(app.ctx.mouse_pos_x / r, app.ctx.mouse_pos_y / r,
 		30, 30)
 
-	path := hexagons.neighbor_hexa_x_in_range(x, y, 30, 30, 3)
+	path := hexagons.neighbor_hexa_x_in_range(x, y, 30, 30, 1)
 
 	// up_left
 	// up_right
@@ -52,7 +52,6 @@ fn on_frame(mut app App) {
 	// right
 	// down_left
 	// down_right
-
 	of_set_x := 0
 	of_set_y := 0
 	hexagons.draw_colored_map_x(app.ctx, of_set_x, of_set_y, r, world_map, path, u8(255))

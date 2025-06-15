@@ -272,14 +272,14 @@ pub fn neighbor_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x) [][]
 				if y % 2 == 0 {
 					neighbor << [[x, y + 1]]
 				} else {
-					neighbor << [[x - 1, y + 1]]
+					neighbor << [[x + 1, y + 1]]
 				}
 			}
 		}
 		.down_right {
 			if x < max_x && y < max_y {
 				if y % 2 == 0 {
-					neighbor << [[x + 1, y + 1]]
+					neighbor << [[x - 1, y + 1]]
 				} else {
 					neighbor << [[x, y + 1]]
 				}
@@ -300,14 +300,14 @@ pub fn neighbor_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x) [][]
 				if y % 2 == 0 {
 					neighbor << [[x, y - 1]]
 				} else {
-					neighbor << [[x - 1, y - 1]]
+					neighbor << [[x + 1, y - 1]]
 				}
 			}
 		}
 		.up_right {
 			if x < max_x && y > 0 {
 				if y % 2 == 0 {
-					neighbor << [[x + 1, y - 1]]
+					neighbor << [[x - 1, y - 1]]
 				} else {
 					neighbor << [[x, y - 1]]
 				}

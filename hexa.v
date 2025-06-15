@@ -328,7 +328,7 @@ pub fn neighbor_hexa_y_by_x(x int, y int, max_x int, max_y int, dir Direction_y)
 // In a range
 pub fn neighbor_hexa_x_in_range(x int, y int, max_x int, max_y int, range int) [][]int {
 	mut neighbor := [][]int{}
-	neighbor << prop_hexa_x(x + 1, y, max_x, max_y, Direction_x.left, range)
+	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_x.left, range)
 	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_x.right, range)
 
 	return neighbor
@@ -336,51 +336,28 @@ pub fn neighbor_hexa_x_in_range(x int, y int, max_x int, max_y int, range int) [
 
 fn prop_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x, n int) [][]int {
 	mut neighbor := [][]int{}
-	if n >= 0 {
+	if n > 0 {
 		match dir {
 			.left {
 				if x > 0 {
 					neighbor << [[x - 1, y]]
-					neighbor << prop_hexa_x(x - 1, y, max_x, max_y, Direction_x.left,
+					neighbor << prop_hexa_x(x - 1, y, max_x, max_y, Direction_x.left, n - 1)
+					neighbor << line_hexa_x(x - 1, y, max_x, max_y, Direction_x.up_left,
 						n - 1)
-					if y % 2 == 0 {
-						if y > 0 {
-							neighbor << [[x - 1, y - 1]]
-							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left,
-								n - 1)
-						}
-						if y < max_y {
-							neighbor << [[x - 1, y + 1]]
-							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left,
-								n - 1)
-						}
-					} else {
-						if y > 0 {
-							neighbor << [[x, y - 1]]
-							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left,
-								n - 1)
-						}
-						if y < max_y {
-							neighbor << [[x, y + 1]]
-							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left,
-								n - 1)
-						}
-					}
+					neighbor << line_hexa_x(x - 1, y, max_x, max_y, Direction_x.down_left,
+						n - 1)
+					
 				}
 			}
 			.right {
 				if x < max_x {
 					neighbor << [[x + 1, y]]
-					neighbor << prop_hexa_x(x + 1, y, max_x, max_y, Direction_x.right,
+					neighbor << prop_hexa_x(x + 1, y, max_x, max_y, Direction_x.rig,
 						n - 1)
-					if y % 2 == 0 {
-						if y > 0 {
-							neighbor << [[x + 1, y - 1]]
-						}
-						if y < max_y {
-							neighbor << [[x + 1, y + 1]]
-						}
-					}
+					neighbor << line_hexa_x(x + 1, y, max_x, max_y, Direction_x.up_right,
+						n - 1)
+					neighbor << line_hexa_x(x + 1, y, max_x, max_y, Direction_x.down_right,
+						n - 1)
 				}
 			}
 			else {}

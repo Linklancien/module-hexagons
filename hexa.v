@@ -331,7 +331,9 @@ pub fn neighbor_hexa_x_in_range(x int, y int, max_x int, max_y int, range int) [
 	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_x.left, range)
 	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_x.right, range)
 	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_x.up_left, range)
-	// neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_x.down_right, range)
+	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_x.down_left, range)
+	neighbor << line_hexa_x(x, y, max_x, max_y, Direction_x.up_right, range)
+	neighbor << line_hexa_x(x, y, max_x, max_y, Direction_x.down_right, range)
 
 	return neighbor
 }
@@ -372,6 +374,20 @@ fn prop_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x, n int) [][]i
 						neighbor << [[x, y - 1]]
 					}
 					neighbor << prop_hexa_x(next_x, y - 1, max_x, max_y, Direction_x.up_left, n - 1)
+					neighbor << line_hexa_x(next_x, y - 1, max_x, max_y, Direction_x.up_right, n - 1)
+				}
+			}
+			.down_left{
+				if x < max_x && y < max_y {
+					mut next_x := x
+					if y % 2 == 0 {
+						neighbor << [[x - 1, y + 1]]
+						next_x = x - 1
+					} else {
+						neighbor << [[x, y + 1]]
+					}
+					neighbor << prop_hexa_x(next_x, y - 1, max_x, max_y, Direction_x.down_left, n - 1)
+					neighbor << line_hexa_x(next_x, y - 1, max_x, max_y, Direction_x.down_right, n - 1)
 				}
 			}
 			else {}

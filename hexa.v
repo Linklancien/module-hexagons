@@ -352,7 +352,7 @@ fn prop_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x, n int) [][]i
 			.right {
 				if x < max_x {
 					neighbor << [[x + 1, y]]
-					neighbor << prop_hexa_x(x + 1, y, max_x, max_y, Direction_x.rig,
+					neighbor << prop_hexa_x(x + 1, y, max_x, max_y, Direction_x.right,
 						n - 1)
 					neighbor << line_hexa_x(x + 1, y, max_x, max_y, Direction_x.up_right,
 						n - 1)

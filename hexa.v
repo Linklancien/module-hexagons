@@ -311,7 +311,7 @@ pub fn neighbor_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x) [][]
 			}
 		}
 	}
-	
+
 	return neighbor
 }
 
@@ -326,58 +326,63 @@ pub fn neighbor_hexa_y_by_x(x int, y int, max_x int, max_y int, dir Direction_y)
 }
 
 // In a range
-pub fn neighbor_hexa_x_in_range(x int, y int, max_x int, max_y int, dir Direction_x, range int) [][]int {
+pub fn neighbor_hexa_x_in_range(x int, y int, max_x int, max_y int, range int) [][]int {
 	mut neighbor := [][]int{}
-	neighbor << prop_hexa_x(x, y, max_x, max_y, dir, range)
-	if neighbor.len == 0 {
-		neighbor = [][]int{len: 1, init: []int{}}
-	}
+	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_X.left, range)
+	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_X.right, range)
+	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_X.up_left, range)
+	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_X.up_right, range)
+	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_X.down_left, range)
+	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_X.down_right, range)
+	
 	return neighbor
 }
 
 fn prop_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x, n int) [][]int {
 	mut neighbor := [][]int{}
-	match dir {
-		.left {
-			if x > 0 {
-				neighbor << [[x - 1, y]]
-				neighbor << prop_hexa_x(x - 1, y, max_x, max_y, Direction_x.left, n - 1)
-				if y % 2 == 0 {
-					if y > 0 {
-						neighbor << [[x - 1, y - 1]]
-						line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left, n - 1)
-					}
-					if y < max_y {
-						neighbor << [[x - 1, y + 1]]
-						line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left, n - 1)
-					}
-				} else {
-					if y > 0 {
-						neighbor << [[x, y - 1]]
-						line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left, n - 1)
-					}
-					if y < max_y {
-						neighbor << [[x, y + 1]]
-						line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left, n - 1)
-					}
-				}
-			}
-		}
-		.right {
-			if x < max_x {
-				neighbor << [[x + 1, y]]
-				neighbor << prop_hexa_x(x + 1, y, max_x, max_y, Direction_x.right, n - 1)
-				if y % 2 == 0 {
-					if y > 0 {
-						neighbor << [[x + 1, y - 1]]
-					}
-					if y < max_y {
-						neighbor << [[x + 1, y + 1]]
+	if n >= 0{
+		match dir {
+			.left {
+				if x > 0 {
+					neighbor << [[x - 1, y]]
+					neighbor << prop_hexa_x(x - 1, y, max_x, max_y, Direction_x.left, n - 1)
+					if y % 2 == 0 {
+						if y > 0 {
+							neighbor << [[x - 1, y - 1]]
+							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left, n - 1)
+						}
+						if y < max_y {
+							neighbor << [[x - 1, y + 1]]
+							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left, n - 1)
+						}
+					} else {
+						if y > 0 {
+							neighbor << [[x, y - 1]]
+							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left, n - 1)
+						}
+						if y < max_y {
+							neighbor << [[x, y + 1]]
+							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left, n - 1)
+						}
 					}
 				}
 			}
+			.right {
+				if x < max_x {
+					neighbor << [[x + 1, y]]
+					neighbor << prop_hexa_x(x + 1, y, max_x, max_y, Direction_x.right, n - 1)
+					if y % 2 == 0 {
+						if y > 0 {
+							neighbor << [[x + 1, y - 1]]
+						}
+						if y < max_y {
+							neighbor << [[x + 1, y + 1]]
+						}
+					}
+				}
+			}
+			else {}
 		}
-		else {}
 	}
 
 	return neighbor

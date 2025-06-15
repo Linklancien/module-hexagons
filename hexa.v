@@ -247,9 +247,6 @@ pub fn neighbors_hexa_y(x int, y int, max_x int, max_y int) [][]int {
 		neighbor << [[x + 1, y]]
 	}
 
-	if neighbor.len == 0 {
-		neighbor = [][]int{len: 1, init: []int{}}
-	}
 	return neighbor
 }
 

@@ -328,41 +328,42 @@ pub fn neighbor_hexa_y_by_x(x int, y int, max_x int, max_y int, dir Direction_y)
 // In a range
 pub fn neighbor_hexa_x_in_range(x int, y int, max_x int, max_y int, range int) [][]int {
 	mut neighbor := [][]int{}
-	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_x.left, range)
+	neighbor << prop_hexa_x(x + 1, y, max_x, max_y, Direction_x.left, range)
 	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_x.right, range)
-	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_x.up_left, range)
-	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_x.up_right, range)
-	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_x.down_left, range)
-	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_x.down_right, range)
-	
+
 	return neighbor
 }
 
 fn prop_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x, n int) [][]int {
 	mut neighbor := [][]int{}
-	if n >= 0{
+	if n >= 0 {
 		match dir {
 			.left {
 				if x > 0 {
 					neighbor << [[x - 1, y]]
-					neighbor << prop_hexa_x(x - 1, y, max_x, max_y, Direction_x.left, n - 1)
+					neighbor << prop_hexa_x(x - 1, y, max_x, max_y, Direction_x.left,
+						n - 1)
 					if y % 2 == 0 {
 						if y > 0 {
 							neighbor << [[x - 1, y - 1]]
-							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left, n - 1)
+							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left,
+								n - 1)
 						}
 						if y < max_y {
 							neighbor << [[x - 1, y + 1]]
-							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left, n - 1)
+							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left,
+								n - 1)
 						}
 					} else {
 						if y > 0 {
 							neighbor << [[x, y - 1]]
-							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left, n - 1)
+							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left,
+								n - 1)
 						}
 						if y < max_y {
 							neighbor << [[x, y + 1]]
-							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left, n - 1)
+							line_hexa_x(x - 1, y - 1, max_x, max_y, Direction_x.left,
+								n - 1)
 						}
 					}
 				}
@@ -370,7 +371,8 @@ fn prop_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x, n int) [][]i
 			.right {
 				if x < max_x {
 					neighbor << [[x + 1, y]]
-					neighbor << prop_hexa_x(x + 1, y, max_x, max_y, Direction_x.right, n - 1)
+					neighbor << prop_hexa_x(x + 1, y, max_x, max_y, Direction_x.right,
+						n - 1)
 					if y % 2 == 0 {
 						if y > 0 {
 							neighbor << [[x + 1, y - 1]]
@@ -391,7 +393,7 @@ fn prop_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x, n int) [][]i
 pub fn line_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x, n int) [][]int {
 	mut neighbor := [][]int{}
 	neighbor << neighbor_hexa_x(x, y, max_x, max_y, dir)
-	if n > 1  && neighbor.len > 0{
+	if n > 1 && neighbor.len > 0 {
 		neighbor << line_hexa_x(neighbor[0][0], neighbor[0][1], max_x, max_y, dir, n - 1)
 	}
 	return neighbor
@@ -510,7 +512,7 @@ pub fn draw_colored_map_x(ctx gg.Context, dec_x int, dec_y int, r f32, world_map
 		for y in 0 .. world_map[x].len {
 			pos_x, pos_y := coo_hexa_x_to_ortho(x + dec_x, y + dec_y)
 			mut transpar := transparency
-			if [x, y] in path{
+			if [x, y] in path {
 				transpar = 155
 			}
 
@@ -525,7 +527,7 @@ pub fn draw_colored_map_y(ctx gg.Context, dec_x int, dec_y int, r f32, world_map
 		for y in 0 .. world_map[x].len {
 			pos_x, pos_y := coo_hexa_y_to_ortho(x + dec_x, y + dec_y)
 			mut transpar := transparency
-			if [x, y] in path{
+			if [x, y] in path {
 				transpar = 155
 			}
 

@@ -341,7 +341,7 @@ pub fn neighbor_hexa_y_by_x(x int, y int, max_x int, max_y int, dir Direction_y)
 }
 
 // In a range
-pub fn neighbor_hexa_x_in_range(x int, y int, max_x int, max_y int, range int) [][]int {
+pub fn neighbors_hexa_x_in_range(x int, y int, max_x int, max_y int, range int) [][]int {
 	mut neighbor := [][]int{}
 	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_x.left, range)
 	neighbor << prop_hexa_x(x, y, max_x, max_y, Direction_x.right, range)

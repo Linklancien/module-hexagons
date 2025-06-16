@@ -43,7 +43,7 @@ fn on_frame(mut app App) {
 	x, y := hexagons.coo_ortho_to_hexa_x(app.ctx.mouse_pos_x / r, app.ctx.mouse_pos_y / r,
 		30, 30)
 
-	path := hexagons.neighbor_hexa_x_in_range(x, y, 30, 30, 3)
+	path := hexagons.neighbors_hexa_x_in_range(x, y, 30, 30, 3)
 
 	// up_left
 	// up_right

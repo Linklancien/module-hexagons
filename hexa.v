@@ -145,8 +145,6 @@ pub fn distance_hexa_x(x int, y int, new_x int, new_y int) int {
 	}
 
 	mut len := dy
-	println('LEN')
-	println(len)
 	if dy%2 == 0{
 		if new_x < x - dy/2{
 			len += abs((x - dy/2) - new_x)

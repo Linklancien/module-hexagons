@@ -142,10 +142,10 @@ pub fn distance_hexa_x(x int, y int, new_x int, new_y int) int {
 	dy := abs(y - new_y)
 	mut len := dy
 	if new_x < x - 1 - dy + y%2{
-		len += abs(x - new_x) - dy/2
+		len += abs(x - 1 - dy + y%2 - new_x)
 	}
 	else if new_x > x + 1 + dy + y%2 - dy%2{
-		len += abs(x - new_x) - dy/2
+	len += abs(new_x - x + 1 + dy + y%2 - dy%2)
 	}
 	return len
 }

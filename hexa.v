@@ -152,7 +152,7 @@ pub fn distance_hexa_x(x int, y int, new_x int, new_y int) int {
 		println('SUP')
 		println(new_x)
 		println(x + 1 + dy + y%2 - dy%22)
-		len += abs(new_x - x + 1 + dy + y%2 - dy%2)
+		len += abs(new_x - (x + 1 + dy + y%2 - dy%2))
 	}
 	return len
 }

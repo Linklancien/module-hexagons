@@ -29,7 +29,7 @@ fn main() {
 		event_fn:      on_event
 		sample_count:  4
 	)
-
+	println(hexagons.distance_hexa_x(0, 0, 2, 1))
 	app.ctx.run()
 }
 

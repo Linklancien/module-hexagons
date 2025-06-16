@@ -140,9 +140,9 @@ pub fn coo_ortho_to_hexa_y(x f32, y f32, max_x int, max_y int) (int, int) {
 // dist
 pub fn distance_hexa_x(x int, y int, new_x int, new_y int) int {
 	dy := abs(y - new_y)
-	if dy == 0{
-		return abs(x - new_x)
-	}
+	// if dy == 0{
+	// 	return abs(x - new_x)
+	// }
 
 	mut len := dy
 	if dy%2 == 0{

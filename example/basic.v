@@ -29,8 +29,8 @@ fn main() {
 		event_fn:      on_event
 		sample_count:  4
 	)
-	println(hexagons.distance_hexa_x(0, 0, 3, 0))
-	// app.ctx.run()
+	println(hexagons.distance_hexa_x(0, 0, 0, 2))
+	app.ctx.run()
 }
 
 fn on_init(mut app App) {}

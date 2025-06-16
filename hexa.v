@@ -140,20 +140,30 @@ pub fn coo_ortho_to_hexa_y(x f32, y f32, max_x int, max_y int) (int, int) {
 // dist
 pub fn distance_hexa_x(x int, y int, new_x int, new_y int) int {
 	dy := abs(y - new_y)
+	if dy == 0{
+		return abs(x - new_x)
+	}
+
 	mut len := dy
+	println('LEN')
 	println(len)
-	if new_x < x - 1 - dy + y%2{
-		println('INF')
-		println(new_x)
-		println(x - 1 - dy + y%2)
-		len += abs(x - 1 - dy + y%2 - new_x)
+	if dy%2 == 0{
+		if new_x < x - dy/2{
+			len += abs((x - dy/2) - new_x)
+		}
+		else if new_x > x + dy/2{
+			len += abs(new_x - (x + dy/2))
+		}
 	}
-	else if new_x > x + 1 + dy + y%2 - dy%2{
-		println('SUP')
-		println(new_x)
-		println(x + 1 + dy + y%2 - dy%2)
-		len += abs(new_x - (x + 1 + dy + y%2 - dy%2))
+	else{
+		if new_x < x - (dy + 1)/2 + y%2{
+			len += abs((x - (dy + 1)/2 + y%2) - new_x)
+		}
+		else if new_x > x + (dy - 1)/2 + y%2{
+			len += abs(new_x - (x + (dy - 1)/2 + y%2))
+		}
 	}
+	
 	return len
 }
 

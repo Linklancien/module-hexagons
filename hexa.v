@@ -461,7 +461,7 @@ pub fn ray_cast_hexa_x(x int, y int, dir Direction_x, world_map [][][]Hexa_tile,
 	for condition {
 		hex_tile := neighbor_hexa_x(pos_x, max_x, pos_y, max_y, dir)
 
-		if hex_tile.len >= 0 {
+		if hex_tile.len > 0 {
 			println(hex_tile)
 			pos_x = hex_tile[0][0]
 			pos_y = hex_tile[0][1]

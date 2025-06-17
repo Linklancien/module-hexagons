@@ -470,6 +470,7 @@ pub fn ray_cast_hexa_x(x int, y int, dir Direction_x, world_map [][][]Hexa_tile,
 				println('Out of view')
 				return -1, -1, -1
 			} else if pos_x >= max_x || pos_y >= max_y {
+				println('Out of map')
 				return -1, -1, -1
 			} else if world_map[pos_x][pos_y].len > min {
 				condition = false
@@ -477,6 +478,7 @@ pub fn ray_cast_hexa_x(x int, y int, dir Direction_x, world_map [][][]Hexa_tile,
 			}
 		} else {
 			// Used when there is no neighbor
+			println('No neighbor')
 			return -1, -1, -1
 		}
 	}

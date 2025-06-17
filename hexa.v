@@ -430,19 +430,21 @@ pub fn direction_to_pos_x(coo_x int, coo_y int, pos_x f32, pos_y f32) Direction_
 	new_y, new_x := coo_hexa_x_to_ortho(coo_x, coo_y)
 	angle := Vec2[f32]{pos_x - new_x, pos_y - new_y}.angle()
 
+	println(angle)
+
 	if math.pi / 6 <= angle && angle < math.pi_2 {
 		return Direction_x.down_right
 	}
 	if math.pi_2 <= angle && angle < math.pi * 5 / 6 {
 		return Direction_x.down_left
 	}
-	if math.pi * 5 / 6 <= angle && angle < math.pi * 7 / 6 {
+	if (math.pi * 5 / 6 <= angle && angle < math.pi) || ( - math.pi <= angle && angle < - math.pi * 5 / 6){
 		return Direction_x.left
 	}
-	if math.pi * 7 / 6 <= angle && angle < math.pi_2 * 3 {
+	if - math.pi * 5 / 6 <= angle && angle < - math.pi_2 {
 		return Direction_x.up_left
 	}
-	if math.pi_2 * 3 <= angle && angle < 2 * math.pi {
+	if - math.pi_2 <= angle && angle < - math.pi / 6 {
 		return Direction_x.up_right
 	}
 	return Direction_x.right

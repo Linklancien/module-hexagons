@@ -478,8 +478,6 @@ pub fn ray_cast_hexa_x(x int, y int, dir Direction_x, world_map [][][]Hexa_tile,
 		} else {
 			// Used when there is no neighbor
 			return -1, -1, -1
-			println('Breaked')
-			break
 		}
 	}
 

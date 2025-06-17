@@ -428,9 +428,7 @@ pub fn line_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x, n int) [
 
 pub fn direction_to_pos_x(coo_x int, coo_y int, pos_x f32, pos_y f32) Direction_x {
 	new_y, new_x := coo_hexa_x_to_ortho(coo_x, coo_y)
-	angle := Vec2[f32]{pos_x - new_x, pos_y - new_y}.angle()
-
-	println(angle)
+	angle := Vec2[f32]{new_x, new_y}.angle_towards(Vec2[f32]{pos_x, pos_y})
 
 	if math.pi / 6 <= angle && angle < math.pi_2 {
 		return Direction_x.down_right

@@ -467,17 +467,17 @@ pub fn ray_cast_hexa_x(x int, y int, dir Direction_x, world_map [][][]Hexa_tile,
 			dist += 1
 
 			if pos_x < max_x || pos_y < max_y{
-				condition = false
+				return -1, -1, -1
 			}
 			else if world_map[pos_x][pos_y].len > 0 {
 				condition = false
 			} else if dist >= max_view {
 				println('Out of view')
-				condition = false
+				return -1, -1, -1
 			}
 		} else {
-			// Used when the border is reach
-			condition = false
+			// Used when there is no neighbor
+			return -1, -1, -1
 			println('Breaked')
 			break
 		}

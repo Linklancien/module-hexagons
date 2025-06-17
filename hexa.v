@@ -2,8 +2,8 @@ module hexagons
 
 import gg
 import gx
-import math { abs, pi}
-import math.vec {Vec}
+import math { abs }
+import math.vec { Vec }
 
 pub enum Direction_x {
 	up_left
@@ -426,23 +426,23 @@ pub fn line_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x, n int) [
 	return neighbor
 }
 
-pub fn direction_to_pos_x(coo_x int, coo_y int, pos_x f32, pos_y f32) Direction_x{
+pub fn direction_to_pos_x(coo_x int, coo_y int, pos_x f32, pos_y f32) Direction_x {
 	new_y, new_x := coo_hexa_x_to_ortho(y, x)
 	angle := Vec[f32]{pos_x - new_x, pos_y - new_y}.angle()
 
-	if  pi/ 6 <= angle && angle < pi / 2{
+	if math.pi / 6 <= angle && angle < math.pi_2 {
 		return Direction_x.down_right
 	}
-	if  pi / 2 <= angle && angle < pi * 5 /6{
+	if math.pi_2 <= angle && angle < math.pi * 5 / 6 {
 		return Direction_x.down_left
 	}
-	if pi * 5 /6 <= angle && angle < pi * 7 / 6{
+	if math.pi * 5 / 6 <= angle && angle < math.pi * 7 / 6 {
 		return Direction_x.left
 	}
-	if pi * 7 / 6 <= angle && angle < pi *  3/ 2{
+	if math.pi * 7 / 6 <= angle && angle < math.pi_2 * 3 {
 		return Direction_x.up_left
 	}
-	if pi * 3 / 2 <= angle && angle < 2 * pi{
+	if math.pi_2 * 3 <= angle && angle < 2 * math.pi {
 		return Direction_x.up_right
 	}
 	return Direction_x.right

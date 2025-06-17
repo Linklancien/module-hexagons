@@ -30,7 +30,7 @@ fn main() {
 		sample_count:  4
 	)
 
-	// app.ctx.run()
+	app.ctx.run()
 }
 
 fn on_init(mut app App) {}

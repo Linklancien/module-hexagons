@@ -436,13 +436,14 @@ pub fn direction_to_pos_x(coo_x int, coo_y int, pos_x f32, pos_y f32) Direction_
 	if math.pi_2 <= angle && angle < math.pi * 5 / 6 {
 		return Direction_x.down_left
 	}
-	if (math.pi * 5 / 6 <= angle && angle < math.pi) || ( - math.pi <= angle && angle < - math.pi * 5 / 6){
+	if (math.pi * 5 / 6 <= angle && angle < math.pi)
+		|| (-math.pi <= angle && angle < -math.pi * 5 / 6) {
 		return Direction_x.left
 	}
-	if - math.pi * 5 / 6 <= angle && angle < - math.pi_2 {
+	if -math.pi * 5 / 6 <= angle && angle < -math.pi_2 {
 		return Direction_x.up_left
 	}
-	if - math.pi_2 <= angle && angle < - math.pi / 6 {
+	if -math.pi_2 <= angle && angle < -math.pi / 6 {
 		return Direction_x.up_right
 	}
 	return Direction_x.right
@@ -465,7 +466,10 @@ pub fn ray_cast_hexa_x(x int, y int, dir Direction_x, world_map [][][]Hexa_tile,
 			pos_y = hex_tile[0][1]
 			dist += 1
 
-			if world_map[pos_x][pos_y].len > 0 {
+			if pos_x < max_x || pos_y < max_y{
+				condition = false
+			}
+			else if world_map[pos_x][pos_y].len > 0 {
 				condition = false
 			} else if dist >= max_view {
 				println('Out of view')

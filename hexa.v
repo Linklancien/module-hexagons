@@ -378,9 +378,9 @@ fn prop_hexa_x(x int, y int, max_x int, max_y int, dir Direction_x, n int) [][]i
 				}
 			}
 			.up_left {
-				if x > 0 && y > 0 {
+				if y > 0 {
 					mut next_x := x
-					if y % 2 == 0 {
+					if y % 2 == 0 && x > 0 {
 						neighbor << [[x - 1, y - 1]]
 						next_x = x - 1
 					} else {

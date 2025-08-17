@@ -1,7 +1,6 @@
 module hexagons
 
 import gg
-import gx
 import math { abs }
 import math.vec { Vec2 }
 
@@ -38,7 +37,7 @@ pub fn dir_y_to_x(dir_y Direction_y) Direction_x {
 
 pub interface Hexa_tile {
 mut:
-	color gx.Color
+	color gg.Color
 }
 
 // tranfo de coo hexagonal en une position orthogonale
@@ -590,6 +589,6 @@ pub fn draw_colored_map_y(ctx gg.Context, dec_x int, dec_y int, r f32, world_map
 	}
 }
 
-pub fn attenuation(color gx.Color, new_a u8) gx.Color {
-	return gx.Color{color.r, color.g, color.b, new_a}
+pub fn attenuation(color gg.Color, new_a u8) gg.Color {
+	return gg.Color{color.r, color.g, color.b, new_a}
 }
